@@ -1,1 +1,3 @@
-HazardTicketPayload = dict
+from typing import Any
+
+HazardTicketPayload = dict[str, Any]

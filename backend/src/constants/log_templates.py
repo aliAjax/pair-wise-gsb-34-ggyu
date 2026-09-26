@@ -9,7 +9,8 @@ LOG_TEMPLATES = {
     "FireDevice.create",
     "FireDevice.update",
     "FireDevice.status",
-    "FireDevice.export"
+    "FireDevice.export",
+    "FireDevice.restore_normal"
   ],
   "InspectionTask": [
     "InspectionTask.create",
@@ -27,6 +28,9 @@ LOG_TEMPLATES = {
     "HazardTicket.create",
     "HazardTicket.update",
     "HazardTicket.status",
-    "HazardTicket.export"
+    "HazardTicket.export",
+    "HazardTicket.dispatch",
+    "HazardTicket.submit_review",
+    "HazardTicket.close"
   ]
 }

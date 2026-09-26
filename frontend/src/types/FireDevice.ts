@@ -1,3 +1,5 @@
+import type { DeviceRuntimeStatus } from "../constants/DeviceRuntimeStatus";
+
 export interface FireDevice {
   id: number;
   building_id: number;
@@ -6,6 +8,6 @@ export interface FireDevice {
   floor: string;
   location_desc: string;
   install_date: string;
-  status: string;
+  status: DeviceRuntimeStatus | string;
   next_maintenance_at: string;
 }
