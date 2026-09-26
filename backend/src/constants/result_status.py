@@ -1,0 +1,2 @@
+ResultStatus = ["NORMAL", "ABNORMAL"]
+RESULT_NORMAL, RESULT_ABNORMAL = ResultStatus

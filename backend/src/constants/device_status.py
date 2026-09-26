@@ -1,0 +1,2 @@
+DeviceStatus = ["NORMAL", "ABNORMAL"]
+DEVICE_NORMAL, DEVICE_ABNORMAL = DeviceStatus

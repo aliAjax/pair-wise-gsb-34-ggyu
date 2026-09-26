@@ -1,21 +1,26 @@
-import { mockData } from "../mocks/seedData";
+import { apiGet } from "../utils/http";
+import { localDb, localListDeviceTickets } from "../mocks/localWorkflow";
 import type { FireDevice } from "../types/FireDevice";
+import type { HazardTicketView } from "../types/HazardTicket";
 
 const endpoint = "/api/fire-device";
 
 export async function listFireDevice(): Promise<FireDevice[]> {
-  if (typeof fetch !== "undefined" && endpoint.startsWith("/api") && true) {
-    try {
-      const res = await fetch(endpoint);
-      if (res.ok) return await res.json();
-    } catch {
-      // Local mock fallback keeps the UI available during offline review.
-    }
+  try {
+    return await apiGet<FireDevice[]>(endpoint);
+  } catch {
+    // 离线降级：与整改单联动的本地设备状态
+    return localDb.fireDevice.map((d) => ({
+      ...d,
+      building_name: localDb.building.find((b) => b.id === d.building_id)?.name ?? ""
+    })) as FireDevice[];
   }
-  return [...(mockData.fireDevice as unknown as FireDevice[])];
 }
 
-export async function saveFireDevice(payload: FireDevice) {
-  console.info("save FireDevice", payload);
-  return payload;
+export async function listDeviceHazardTickets(deviceId: number): Promise<HazardTicketView[]> {
+  try {
+    return await apiGet<HazardTicketView[]>(`${endpoint}/${deviceId}/hazard-tickets`);
+  } catch {
+    return localListDeviceTickets(deviceId);
+  }
 }

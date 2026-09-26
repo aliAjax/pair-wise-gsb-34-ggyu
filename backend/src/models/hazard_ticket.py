@@ -1,4 +1,14 @@
 from pydantic import BaseModel
+
+
+class HazardTicketEvent(BaseModel):
+    action: str
+    actor: str
+    role: str
+    at: str
+    detail: str
+
+
 class HazardTicket(BaseModel):
     id: int | float
     result_id: int | float
@@ -8,3 +18,4 @@ class HazardTicket(BaseModel):
     rectify_status: str
     rectify_note: str
     closed_at: str
+    history: list[HazardTicketEvent] = []

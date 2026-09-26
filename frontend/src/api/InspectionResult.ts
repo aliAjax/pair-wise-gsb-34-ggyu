@@ -1,21 +1,14 @@
-import { mockData } from "../mocks/seedData";
+import { apiGet } from "../utils/http";
+import { localDb } from "../mocks/localWorkflow";
 import type { InspectionResult } from "../types/InspectionResult";
 
 const endpoint = "/api/inspection-result";
 
 export async function listInspectionResult(): Promise<InspectionResult[]> {
-  if (typeof fetch !== "undefined" && endpoint.startsWith("/api") && true) {
-    try {
-      const res = await fetch(endpoint);
-      if (res.ok) return await res.json();
-    } catch {
-      // Local mock fallback keeps the UI available during offline review.
-    }
+  try {
+    return await apiGet<InspectionResult[]>(endpoint);
+  } catch {
+    // 离线降级：本地种子数据
+    return [...(localDb.inspectionResult as InspectionResult[])];
   }
-  return [...(mockData.inspectionResult as unknown as InspectionResult[])];
-}
-
-export async function saveInspectionResult(payload: InspectionResult) {
-  console.info("save InspectionResult", payload);
-  return payload;
 }

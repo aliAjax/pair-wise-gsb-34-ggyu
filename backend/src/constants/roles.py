@@ -1,0 +1,8 @@
+Roles = ["SUPERVISOR", "MAINTAINER", "INSPECTOR", "AUDITOR"]
+SUPERVISOR, MAINTAINER, INSPECTOR, AUDITOR = Roles
+ROLE_NAMES = {
+    "SUPERVISOR": "物业主管",
+    "MAINTAINER": "维保人员",
+    "INSPECTOR": "巡检员",
+    "AUDITOR": "审计员",
+}
